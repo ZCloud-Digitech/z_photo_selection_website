@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Z Photo Selection | System Requirements & Installation</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Download Z Photo Selection software for Windows. Premium gallery system for professional photographers. Get started with your free trial today.">
+    <meta name="keywords" content="download photo selection, windows photography software, studio management download, photography tools">
+    <meta name="author" content="Zerolink India">
+    <meta name="robots" content="index, follow">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #0a0a0a;
+            --text-primary: #ffffff;
+            --text-secondary: #a3a3a3;
+            --text-muted: #525252;
+            --accent: #ffffff;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            zoom: 0.8;
+        }
+        
+        /* Glass effects */
+        .glass {
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+        }
+        .glass-bright {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        /* Gradient text */
+        .text-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #737373 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Button effects */
+        .btn-primary {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px -10px rgba(255, 255, 255, 0.15);
+        }
+        
+        /* Nav active state */
+        .nav-active {
+            background: rgba(0, 0, 0, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Progress steps */
+        .step-number {
+            transition: all 0.3s ease;
+        }
+        .step-card:hover .step-number {
+            transform: scale(1.1);
+            background: white;
+            color: black;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    
+    <!-- Header -->
+    <header id="header" class="fixed top-0 w-full z-50 transition-all duration-500 py-6">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3 group cursor-pointer">
+                <img src="assets/logo.png" alt="Zerolink Logo" class="w-11 h-11 rounded-xl shadow-lg shadow-white/10 group-hover:scale-110 transition-transform object-contain">
+                <div>
+                    <h1 class="font-extrabold text-xl tracking-tight leading-none">ZEROLINK<span class="text-neutral-500">.</span></h1>
+                    <p class="text-[9px] text-neutral-500 uppercase tracking-[0.3em] mt-1 font-bold">Studio Selection Engine</p>
+                </div>
+            </a>
+            
+            <nav class="hidden lg:flex items-center gap-10 text-[13px] font-bold uppercase tracking-widest text-neutral-400">
+                <a href="index.html#features" class="hover:text-white transition">Tech Specs</a>
+                <a href="index.html#workflow" class="hover:text-white transition">Workflow</a>
+                <a href="index.html#pricing" class="hover:text-white transition">License</a>
+                <a href="download.html" class="bg-white text-black px-6 py-2.5 rounded-full hover:bg-neutral-200 transition-all flex items-center gap-2">
+                    <i data-lucide="download" class="w-4 h-4"></i> Download
+                </a>
+            </nav>
+            
+            <button class="lg:hidden text-white"><i data-lucide="menu"></i></button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-40 pb-24 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-[150px] -z-10"></div>
+        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-neutral-500/10 rounded-full blur-[100px] -z-10"></div>
+        
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-4xl mx-auto mb-20">
+                <div class="inline-flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full mb-8">
+                    <i data-lucide="download-cloud" class="w-4 h-4 text-white"></i>
+                    <span class="text-[11px] font-bold text-white uppercase tracking-widest">Latest Version Available</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-black mb-8 leading-[1.1] tracking-tighter">
+                    Download <span class="text-gradient">Z Photo Selection</span>
+                </h1>
+                
+                <p class="text-neutral-400 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed">
+                    Get started with the most powerful photo selection system for professional studios. Quick setup, instant results.
+                </p>
+                
+                <!-- Primary Download Button -->
+                <a href="https://github.com/ZCloud-Digitech/zstore/releases/download/P-01/PhotoSelection.exe" download class="btn-primary bg-white text-black px-12 py-6 rounded-2xl font-black text-xl shadow-xl shadow-white/10 inline-flex items-center justify-center gap-4 mb-6">
+                    <i data-lucide="download" class="w-7 h-7 fill-current"></i>
+                    <span>DOWNLOAD FOR WINDOWS</span>
+                </a>
+                
+                <div class="flex items-center justify-center gap-8 text-sm text-neutral-500">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="check-circle" class="w-4 h-4 text-white"></i>
+                        <span>Version 1.0</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="hard-drive" class="w-4 h-4 text-white"></i>
+                        <span>~50 MB</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-white"></i>
+                        <span>Secure Download</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- System Requirements -->
+    <section class="py-24 bg-white/[0.02]">
+        <div class="container mx-auto px-6">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-16">
+                    <p class="text-neutral-500 font-bold uppercase tracking-[0.4em] text-xs mb-4">Technical Specifications</p>
+                    <h2 class="text-4xl md:text-6xl font-black mb-6">System <span class="text-gradient">Requirements</span></h2>
+                    <p class="text-neutral-400 text-lg max-w-2xl mx-auto">Ensure your system meets these requirements for optimal performance</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <!-- Minimum Requirements -->
+                    <div class="glass p-10 rounded-3xl border-white/10">
+                        <div class="flex items-center gap-3 mb-8">
+                            <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+                                <i data-lucide="activity" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold">Minimum Requirements</h3>
+                        </div>
+                        
+                        <div class="space-y-6">
+                            <!-- Operating System -->
+                            <div>
+                                <div class="flex items-center gap-2 mb-3">
+                                    <i data-lucide="monitor" class="w-5 h-5 text-neutral-400"></i>
+                                    <h4 class="font-bold">Operating System</h4>
+                                </div>
+                                <ul class="space-y-2 text-sm text-neutral-300 ml-7">
+                                    <li class="flex items-start gap-2">
+                                        <i data-lucide="chevron-right" class="w-4 h-4 shrink-0 mt-0.5"></i>
+                                        <span>Windows 10 (64-bit) or later</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Processor -->
+                            <div>
+                                <div class="flex items-center gap-2 mb-3">
+                                    <i data-lucide="cpu" class="w-5 h-5 text-neutral-400"></i>
+                                    <h4 class="font-bold">Processor</h4>
+                                </div>
+                                <ul class="space-y-2 text-sm text-neutral-300 ml-7">
+                                    <li class="flex items-start gap-2">
+                                        <i data-lucide="chevron-right" class="w-4 h-4 shrink-0 mt-0.5"></i>
+                                        <span>Intel Core i3 or AMD equivalent</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Memory -->
+                            <div>
+                                <div class="flex items-center gap-2 mb-3">
+                                    <i data-lucide="memory-stick" class="w-5 h-5 text-neutral-400"></i>
+                                    <h4 class="font-bold">Memory (RAM)</h4>
+                                </div>
+                                <ul class="space-y-2 text-sm text-neutral-300 ml-7">
+                                    <li class="flex items-start gap-2">
+                                        <i data-lucide="chevron-right" class="w-4 h-4 shrink-0 mt-0.5"></i>
+                                        <span>4 GB RAM</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Storage -->
+                            <div>
+                                <div class="flex items-center gap-2 mb-3">
+                                    <i data-lucide="hard-drive" class="w-5 h-5 text-neutral-400"></i>
+                                    <h4 class="font-bold">Storage</h4>
+                                </div>
+                                <ul class="space-y-2 text-sm text-neutral-300 ml-7">
+                                    <li class="flex items-start gap-2">
+                                        <i data-lucide="chevron-right" class="w-4 h-4 shrink-0 mt-0.5"></i>
+                                        <span>500 MB available space</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Internet -->
+                            <div>
+                                <div class="flex items-center gap-2 mb-3">
+                                    <i data-lucide="wifi" class="w-5 h-5 text-neutral-400"></i>
+                                    <h4 class="font-bold">Internet Connection</h4>
+                                </div>
+                                <ul class="space-y-2 text-sm text-neutral-300 ml-7">
+                                    <li class="flex items-start gap-2">
+                                        <i data-lucide="chevron-right" class="w-4 h-4 shrink-0 mt-0.5"></i>
+                                        <span>Broadband connection (2 Mbps+)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recommended Requirements -->
+                    <div class="glass-bright p-10 rounded-3xl border-white/20">
+                        <div class="flex items-center gap-3 mb-8">
+                            <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center">
+                                <i data-lucide="zap" class="w-6 h-6 text-black"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold">Recommended</h3>
+                            <span class="ml-auto bg-white text-black text-xs font-black px-3 py-1 rounded-full">BEST</span>
+                        </div>
+                        
+                        <div class="space-y-6">
+                            <!-- Operating System -->
+                            <div>
+                                <div class="flex items-center gap-2 mb-3">
+                                    <i data-lucide="monitor" class="w-5 h-5 text-white"></i>
+                                    <h4 class="font-bold text-white">Operating System</h4>
+                                </div>
+                                <ul class="space-y-2 text-sm text-neutral-300 ml-7">
+                                    <li class="flex items-start gap-2">
+                                        <i data-lucide="chevron-right" class="w-4 h-4 shrink-0 mt-0.5 text-white"></i>
+                                        <span>Windows 11 (64-bit)</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Processor -->
+                            <div>
+                                <div class="flex items-center gap-2 mb-3">
+                                    <i data-lucide="cpu" class="w-5 h-5 text-white"></i>
+                                    <h4 class="font-bold text-white">Processor</h4>
+                                </div>
+                                <ul class="space-y-2 text-sm text-neutral-300 ml-7">
+                                    <li class="flex items-start gap-2">
+                                        <i data-lucide="chevron-right" class="w-4 h-4 shrink-0 mt-0.5 text-white"></i>
+                                        <span>Intel Core i5/i7 or AMD Ryzen 5/7</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Memory -->
+                            <div>
+                                <div class="flex items-center gap-2 mb-3">
+                                    <i data-lucide="memory-stick" class="w-5 h-5 text-white"></i>
+                                    <h4 class="font-bold text-white">Memory (RAM)</h4>
+                                </div>
+                                <ul class="space-y-2 text-sm text-neutral-300 ml-7">
+                                    <li class="flex items-start gap-2">
+                                        <i data-lucide="chevron-right" class="w-4 h-4 shrink-0 mt-0.5 text-white"></i>
+                                        <span>8 GB RAM or higher</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Storage -->
+                            <div>
+                                <div class="flex items-center gap-2 mb-3">
+                                    <i data-lucide="hard-drive" class="w-5 h-5 text-white"></i>
+                                    <h4 class="font-bold text-white">Storage</h4>
+                                </div>
+                                <ul class="space-y-2 text-sm text-neutral-300 ml-7">
+                                    <li class="flex items-start gap-2">
+                                        <i data-lucide="chevron-right" class="w-4 h-4 shrink-0 mt-0.5 text-white"></i>
+                                        <span>SSD with 1 GB available space</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Internet -->
+                            <div>
+                                <div class="flex items-center gap-2 mb-3">
+                                    <i data-lucide="wifi" class="w-5 h-5 text-white"></i>
+                                    <h4 class="font-bold text-white">Internet Connection</h4>
+                                </div>
+                                <ul class="space-y-2 text-sm text-neutral-300 ml-7">
+                                    <li class="flex items-start gap-2">
+                                        <i data-lucide="chevron-right" class="w-4 h-4 shrink-0 mt-0.5 text-white"></i>
+                                        <span>High-speed connection (10 Mbps+)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Platform Compatibility -->
+                <div class="glass p-8 rounded-2xl border-white/10">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                            <i data-lucide="info" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-3">Platform Compatibility</h4>
+                            <div class="space-y-3 text-sm text-neutral-300">
+                                <p><strong class="text-white">Windows:</strong> Native support for Windows 10 and Windows 11 (64-bit). The .exe installer provides seamless installation and updates.</p>
+                                <p><strong class="text-white">Mac Users:</strong> Currently, Z Photo Selection is optimized for Windows. Mac users can run the software using compatibility solutions like:</p>
+                                <ul class="ml-6 space-y-2 mt-2">
+                                    <li class="flex items-start gap-2">
+                                        <i data-lucide="check" class="w-4 h-4 text-neutral-400 shrink-0 mt-0.5"></i>
+                                        <span><strong>Parallels Desktop</strong> or <strong>VMware Fusion</strong> (Virtual Machine)</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <i data-lucide="check" class="w-4 h-4 text-neutral-400 shrink-0 mt-0.5"></i>
+                                        <span><strong>Boot Camp</strong> (Dual boot with Windows)</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <i data-lucide="check" class="w-4 h-4 text-neutral-400 shrink-0 mt-0.5"></i>
+                                        <span><strong>Wine</strong> or <strong>CrossOver</strong> (Compatibility layer - may have limitations)</span>
+                                    </li>
+                                </ul>
+                                <p class="text-neutral-400 text-xs mt-4"><i data-lucide="alert-circle" class="w-3 h-3 inline mr-1"></i> Note: Native Mac version is under development. Contact support for updates on Mac release.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Steps -->
+    <section class="py-24">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16">
+                    <p class="text-neutral-500 font-bold uppercase tracking-[0.4em] text-xs mb-4">Quick Setup</p>
+                    <h2 class="text-4xl md:text-6xl font-black mb-6">Installation <span class="text-gradient">Steps</span></h2>
+                    <p class="text-neutral-400 text-lg">Get up and running in under 5 minutes</p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Step 1 -->
+                    <div class="glass p-8 rounded-2xl border-white/10 step-card group">
+                        <div class="flex items-start gap-6">
+                            <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-white font-black text-xl shrink-0 step-number">1</div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-xl mb-3">Download the Installer</h4>
+                                <p class="text-neutral-400 text-sm mb-4">Click the download button above to get PhotoSelection.exe. The file is approximately 50 MB and should download within seconds.</p>
+                                <div class="bg-neutral-900/50 p-3 rounded-lg text-xs text-neutral-500 font-mono">
+                                    <i data-lucide="file-down" class="w-3 h-3 inline mr-2"></i>PhotoSelection.exe (~50 MB)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="glass p-8 rounded-2xl border-white/10 step-card group">
+                        <div class="flex items-start gap-6">
+                            <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-white font-black text-xl shrink-0 step-number">2</div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-xl mb-3">Run the Installer</h4>
+                                <p class="text-neutral-400 text-sm mb-4">Locate the downloaded file in your Downloads folder and double-click to run. Windows may show a security prompt - click "Run anyway" to proceed.</p>
+                                <div class="flex gap-2 text-xs">
+                                    <span class="bg-neutral-900/50 px-3 py-1.5 rounded-lg text-neutral-400"><i data-lucide="shield-check" class="w-3 h-3 inline mr-1"></i>Verified Publisher</span>
+                                    <span class="bg-neutral-900/50 px-3 py-1.5 rounded-lg text-neutral-400"><i data-lucide="lock" class="w-3 h-3 inline mr-1"></i>Safe & Secure</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="glass p-8 rounded-2xl border-white/10 step-card group">
+                        <div class="flex items-start gap-6">
+                            <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-white font-black text-xl shrink-0 step-number">3</div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-xl mb-3">Follow Setup Wizard</h4>
+                                <p class="text-neutral-400 text-sm mb-4">The installation wizard will guide you through the process. Accept the license agreement, choose installation location, and click Install.</p>
+                                <div class="bg-neutral-900/50 p-3 rounded-lg text-xs text-neutral-400">
+                                    <i data-lucide="clock" class="w-3 h-3 inline mr-2"></i>Installation typically takes 1-2 minutes
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="glass p-8 rounded-2xl border-white/10 step-card group">
+                        <div class="flex items-start gap-6">
+                            <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-white font-black text-xl shrink-0 step-number">4</div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-xl mb-3">Launch & Configure</h4>
+                                <p class="text-neutral-400 text-sm mb-4">Once installed, launch Z Photo Selection from your desktop or start menu. Enter your license key (or start free trial) and configure your first gallery folder.</p>
+                                <div class="bg-white/5 border border-white/10 p-4 rounded-lg mt-4">
+                                    <p class="text-xs text-neutral-400 mb-2">🎉 <strong class="text-white">You're all set!</strong> Start sharing galleries with your clients immediately.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Need Help Section -->
+    <section class="py-24 bg-white/[0.02]">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto glass p-12 rounded-3xl border-white/10 text-center">
+                <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <i data-lucide="headphones" class="w-8 h-8 text-white"></i>
+                </div>
+                <h3 class="text-3xl font-black mb-4">Need Installation Help?</h3>
+                <p class="text-neutral-400 mb-8">Our support team is here to assist you with any installation or setup issues.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#" class="bg-white text-black px-8 py-4 rounded-xl font-bold hover:bg-neutral-200 transition inline-flex items-center justify-center gap-2">
+                        <i data-lucide="message-square" class="w-5 h-5"></i> Chat on WhatsApp
+                    </a>
+                    <a href="faqs.html" class="glass-bright px-8 py-4 rounded-xl font-bold hover:bg-white/10 transition inline-flex items-center justify-center gap-2">
+                        <i data-lucide="help-circle" class="w-5 h-5"></i> View FAQs
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-24 pb-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 mb-20">
+                <div class="col-span-2">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-black font-black text-sm">Z</div>
+                        <span class="font-black text-xl tracking-tighter">Z PHOTO.</span>
+                    </div>
+                    <p class="text-neutral-500 text-sm max-w-sm leading-relaxed mb-8">The most efficient photography selection system built for Indian professional studios. Made by photographers, for photographers.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 glass rounded-full flex items-center justify-center text-neutral-400 hover:text-white hover:bg-white/10 transition"><i data-lucide="youtube"></i></a>
+                        <a href="#" class="w-10 h-10 glass rounded-full flex items-center justify-center text-neutral-400 hover:text-white hover:bg-white/10 transition"><i data-lucide="instagram"></i></a>
+                        <a href="#" class="w-10 h-10 glass rounded-full flex items-center justify-center text-neutral-400 hover:text-white hover:bg-white/10 transition"><i data-lucide="linkedin"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h5 class="font-bold mb-6 text-sm uppercase tracking-widest text-white">Quick Links</h5>
+                    <ul class="space-y-4 text-sm text-neutral-500">
+                        <li><a href="index.html" class="hover:text-white transition">Home</a></li>
+                        <li><a href="index.html#features" class="hover:text-white transition">Features</a></li>
+                        <li><a href="faqs.html" class="hover:text-white transition">FAQs</a></li>
+                        <li><a href="#" class="hover:text-white transition">Contact Sales</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold mb-6 text-sm uppercase tracking-widest text-white">Legal</h5>
+                    <ul class="space-y-4 text-sm text-neutral-500">
+                        <li><a href="privacy.html" class="hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="license.html" class="hover:text-white transition">License Terms</a></li>
+                        <li><a href="refund.html" class="hover:text-white transition">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/5 pt-12 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-[10px] text-neutral-600 font-bold tracking-widest uppercase">© 2024 Z Photo Selection India. All Rights Reserved.</p>
+                <div class="flex items-center gap-3 bg-white/5 px-4 py-1.5 rounded-full border border-white/5">
+                    <span class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest">Server Status:</span>
+                    <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span>
+                    <span class="text-[10px] font-bold text-white uppercase tracking-widest">Operational</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Init Icons
+        lucide.createIcons();
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 80) {
+                header.classList.add('nav-active');
+            } else {
+                header.classList.remove('nav-active');
+            }
+        });
+
+        // Reveal animations
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>
