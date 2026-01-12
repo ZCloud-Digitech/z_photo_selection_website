@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursor Alignment Test</title>
+    <style>
+        body {
+            background-color: #111;
+            color: white;
+            font-family: monospace;
+            cursor: none; /* Hide default cursor */
+            overflow: hidden;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- COPIED CURSOR CSS FROM index.html --- */
+        .cursor-spotlight {
+            position: fixed;
+            width: 60px;
+            height: 45px;
+            pointer-events: none;
+            z-index: 9999;
+            transition: opacity 0.3s ease;
+        }
+        .cursor-spotlight::before {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 40px;
+            background: rgba(255,255,255,0.15);
+            border: 2px solid rgba(255,255,255,0.4);
+            border-radius: 8px;
+            top: 5px;
+            left: 0;
+        }
+        .cursor-spotlight::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 30%, transparent 32%, transparent 50%, rgba(255,255,255,0.2) 52%, transparent 54%);
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 50%;
+            top: 13px;
+            left: 18px;
+        }
+        .cursor-camera-flash {
+            position: absolute;
+            width: 15px;
+            height: 8px;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 2px;
+            top: 0;
+            left: 8px;
+            transition: all 0.1s ease;
+        }
+        .cursor-camera-flash.flash-on {
+            background: rgba(255,255,255,1);
+            box-shadow: 0 0 30px 15px rgba(255,255,255,0.8), 0 0 60px 30px rgba(255,255,255,0.4);
+        }
+
+        /* --- TEST TARGETS AND GRID --- */
+        .grid-line {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.1);
+            pointer-events: none;
+        }
+        .grid-line.h { width: 100%; height: 1px; }
+        .grid-line.v { height: 100%; width: 1px; }
+
+        .target {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 1px solid red;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: auto;
+        }
+        .target::before, .target::after {
+            content: '';
+            position: absolute;
+            background: red;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .target::before { width: 100%; height: 1px; }
+        .target::after { width: 1px; height: 100%; }
+
+        /* --- DEBUG INFO --- */
+        #debugInfo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border: 1px solid #333;
+            pointer-events: none;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div id="debugInfo">
+        <strong>Cursor Logic Debug</strong><br>
+        Mouse X: <span id="mouseX">0</span><br>
+        Mouse Y: <span id="mouseY">0</span><br>
+        Cursor CSS Left: <span id="cssLeft">0</span><br>
+        Cursor CSS Top: <span id="cssTop">0</span><br>
+        <hr style="border-color: #333">
+        <strong>Calculated Offset:</strong><br>
+        X Offset: <span id="offX">0</span> (Expected: -30)<br>
+        Y Offset: <span id="offY">0</span> (Expected: -25)<br>
+        <em>If the red crosshair is NOT in the center of the camera lens, the offset is wrong.</em>
+    </div>
+
+    <!-- Grid Lines for visual reference -->
+    <div class="grid-line h" style="top: 50%;"></div>
+    <div class="grid-line v" style="left: 50%;"></div>
+
+    <!-- Targets around the screen -->
+    <div class="target" style="top: 50%; left: 50%;"></div> <!-- Center -->
+    <div class="target" style="top: 20%; left: 20%;"></div>
+    <div class="target" style="top: 20%; left: 80%;"></div>
+    <div class="target" style="top: 80%; left: 20%;"></div>
+    <div class="target" style="top: 80%; left: 80%;"></div>
+
+    <!-- The actual cursor element -->
+    <div class="cursor-spotlight" id="cursorSpotlight">
+        <div class="cursor-camera-flash"></div>
+    </div>
+
+    <script>
+        const spotlight = document.getElementById('cursorSpotlight');
+        const dMouseX = document.getElementById('mouseX');
+        const dMouseY = document.getElementById('mouseY');
+        const dCssLeft = document.getElementById('cssLeft');
+        const dCssTop = document.getElementById('cssTop');
+        const dOffX = document.getElementById('offX');
+        const dOffY = document.getElementById('offY');
+
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+
+            // --- THE LOGIC FROM index.html ---
+            // Center calculation:
+            // "Lens" center visually appears around:
+            // .cursor-spotlight::after is at top: 13px, left: 18px, width: 24px, height: 24px
+            // Center of lens circle relative to spotlight box:
+            // X: 18px (left) + 12px (radius) = 30px
+            // Y: 13px (top) + 12px (radius) = 25px
+            
+            // So we want the Mouse Point (x,y) to be at Spotlight(30, 25)
+            // CSS Position = Mouse - CenterOffset
+            const offsetX = 30;
+            const offsetY = 25;
+
+            const finalLeft = x - offsetX;
+            const finalTop = y - offsetY;
+
+            spotlight.style.left = finalLeft + 'px';
+            spotlight.style.top = finalTop + 'px';
+
+            // --- DEBUG UPDATE ---
+            dMouseX.textContent = x;
+            dMouseY.textContent = y;
+            dCssLeft.textContent = finalLeft;
+            dCssTop.textContent = finalTop;
+            
+            dOffX.textContent = finalLeft - x; // Should be -30
+            dOffY.textContent = finalTop - y;  // Should be -25
+        });
+
+        // Flash click effect
+        document.addEventListener('mousedown', () => {
+             const flash = document.querySelector('.cursor-camera-flash');
+             flash.classList.add('flash-on');
+             setTimeout(() => flash.classList.remove('flash-on'), 100);
+        });
+    </script>
+</body>
+</html>

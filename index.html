@@ -87,6 +87,12 @@
             background-color: var(--bg-primary);
             color: var(--text-primary);
             zoom: 0.8;
+            cursor: none !important;
+        }
+        
+        /* Force hide cursor on everything to prevent double-cursor gap illusion */
+        *, a, button, [role="button"], input, select, textarea {
+            cursor: none !important;
         }
         
         /* Glass effects - B/W version */
@@ -300,7 +306,6 @@
             height: 45px;
             pointer-events: none;
             z-index: 9999;
-            transform: translate(-50%, -50%);
             transition: opacity 0.3s ease;
         }
         .cursor-spotlight::before {
@@ -444,10 +449,10 @@
     </header>
 
     <!-- Cursor Camera -->
-    <div class="cursor-spotlight" id="cursorSpotlight">
+    <!-- Camera Cursor (re-added, perfectly centered) -->
+    <div class="cursor-spotlight" id="cursorSpotlight" style="display:none">
         <div class="cursor-camera-flash"></div>
     </div>
-    
     <!-- Screen Flash Effect -->
     <div class="screen-flash" id="screenFlash"></div>
 
@@ -750,7 +755,7 @@
                         <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
                         <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
                     </div>
-                    <p class="text-neutral-300 text-sm leading-relaxed mb-8 italic">"Z Photo changed our workflow completely. What used to take hours now takes minutes. Our clients love the premium feel of the selection gallery."</p>
+                    <p class="text-neutral-300 text-sm leading-relaxed mb-8 italic">"Zerolink changed our workflow completely. What used to take hours now takes minutes. Our clients love the premium feel of the selection gallery."</p>
                     <div class="flex items-center gap-4">
                         <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white font-bold text-lg">RK</div>
                         <div>
@@ -1028,7 +1033,7 @@
                 <div class="col-span-2">
                     <div class="flex items-center gap-3 mb-6">
                         <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-black font-black text-sm">Z</div>
-                        <span class="font-black text-xl tracking-tighter">Z PHOTO.</span>
+                        <span class="font-black text-xl tracking-tighter">ZEROLINK.</span>
                     </div>
                     <p class="text-neutral-500 text-sm max-w-sm leading-relaxed mb-8">The most efficient photography selection system built for Indian professional studios. Made by photographers, for photographers.</p>
                     <div class="flex gap-4">
@@ -1058,9 +1063,9 @@
             
             <div class="border-t border-white/5 pt-12 flex flex-col md:flex-row justify-between items-center gap-6">
                 <div class="flex flex-col md:flex-row items-center gap-3 md:gap-6">
-                    <p class="text-[10px] text-neutral-600 font-bold tracking-widest uppercase">© 2024 Z Photo Selection India. All Rights Reserved.</p>
+                    <p class="text-[10px] text-neutral-600 font-bold tracking-widest uppercase">© 2024 Zerolink India. All Rights Reserved.</p>
                     <span class="text-neutral-700">|</span>
-                    <p class="text-[10px] text-neutral-500 font-bold tracking-widest uppercase">Powered by <a href="https://nex-x.io" target="_blank" rel="noopener noreferrer" class="text-white hover:text-neutral-300 transition">Nex-X</a></p>
+                    <p class="text-[10px] text-neutral-500 font-bold tracking-widest uppercase">Powered by <a href="https://nex-x.io" target="_blank" rel="noopener noreferrer" class="text-white hover:text-neutral-300 transition">Z Cloud Digitech</a></p>
                 </div>
                 <div class="flex items-center gap-3 bg-white/5 px-4 py-1.5 rounded-full border border-white/5">
                     <span class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest">Server Status:</span>
@@ -1123,142 +1128,98 @@
             document.body.classList.add('opacity-100');
         });
 
-        // ===== CURSOR SPOTLIGHT EFFECT =====
+        // ===== RE-ADDED CAMERA CURSOR, PERFECTLY CENTERED =====
         const spotlight = document.getElementById('cursorSpotlight');
-        const heroSection = document.getElementById('heroSection');
-        let mouseX = 0, mouseY = 0;
-        let spotlightX = 0, spotlightY = 0;
-        
-        // Track mouse position
+        // Show the cursor only after first mouse move
+        let cursorVisible = false;
         document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
+            // Robust Zoom Detection
+            let zoom = 1;
+            const bodyStyle = window.getComputedStyle(document.body);
+            if (bodyStyle.zoom) {
+                zoom = parseFloat(bodyStyle.zoom) || 1;
+            }
+            // Fallback: If layout seems scaled but zoom reports 1 (sanity check)
+            // e.g. if we know we hardcoded 0.8, we can trust the CSS if JS fails, but better to rely on computed.
+            
+            // Cursor Center Offsets (Visual center relative to top-left)
+            // Lens center is at ~30px X, ~25px Y
+            const offsetX = 30;
+            const offsetY = 25;
+            
+            // Formula: CSS_Pos = (Client_Pos / Zoom) - CSS_Offset
+            const left = (e.clientX / zoom) - offsetX;
+            const top = (e.clientY / zoom) - offsetY;
+            
+            spotlight.style.left = left + 'px';
+            spotlight.style.top = top + 'px';
+            
+            if (!cursorVisible) {
+                spotlight.style.display = 'block';
+                cursorVisible = true;
+            }
         });
-        
-        // Smooth spotlight animation
-        function animateSpotlight() {
-            // Smooth interpolation
-            spotlightX += (mouseX - spotlightX) * 0.1;
-            spotlightY += (mouseY - spotlightY) * 0.1;
-            
-            spotlight.style.left = spotlightX + 'px';
-            spotlight.style.top = spotlightY + 'px';
-            
-            requestAnimationFrame(animateSpotlight);
-        }
-        animateSpotlight();
-        
-        // Camera cursor is now visible on all sections
-        spotlight.style.opacity = '1';
         
         // ===== CAMERA FLASH ON CLICK =====
         const cameraFlash = document.querySelector('.cursor-camera-flash');
         const screenFlash = document.getElementById('screenFlash');
         
-        // ===== OPTIMIZED AUDIO HANDLING FOR MOBILE/TABLET =====
-        // Audio context for better mobile support
-        let audioContext = null;
-        let audioBuffer = null;
-        let audioLoaded = false;
-        let userInteracted = false;
+        // ===== SIMPLE FAST AUDIO =====
+        // Use data URL for instant loading (no network delay)
+        const shutterSoundBase64 = 'data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA//tQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAABhgC7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7//////////////////////////////////////////////////////////////////8AAAAATGF2YzU4LjEzAAAAAAAAAAAAAAAAJAAAAAAAAAAAAYYNBrL5AAAAAAAAAAAAAAAAAAAAAP/7kGQAAANUMEoFPeACNQV40KEKYAQCR7W1xBTYg1U3Y1IEAADeHNHZeS2FP1bP7qT/2f9p/bD/s//5r/L//+x/b//p////s/5//////8v/t/////////u3///+X/////v///////X/y0Fg4HAdHBwcJCQ0LAQEDAQEQQIABCQgAQAABIQIAgQAAKEiAAQICIQIBAgQAQgQAC4IEEABBAIAQAAHAA8A+B/+5JkAAACAJNvYxhAABwC5bWDAAAETlu5OMAAAHULdycYAABP/2H/9n/+b/y/+J/2f/6f/L/+///9v+3////0//f/9P////p////9/////0////z/////X/////t//////5f//6/y//z1/w1B4GAQDBweJCQsFAQEDAQEQgQECAgIEAAAARCBAAIABIQIBAgQESACAAgACAIABCBAAAgQAQIAHeAHgeBA8w8+wB8CD4ICAICBhD4JB8PwfA+D8Pw/B8HwfB/8Hg+D4f/4Pg//w+H4f////+CAY/+H///8H/w//w/8H/D////4cAwGA4PhAMEg+EHwQDHwfB8A4Pg+H4PA+D/D4fh+H4Ph/8Hw/D/w/B/8H/g//w////B//g//wf///8AAAAATGF2YzU4LjEzAAAAAAAAAAAAAAAAJAAAAAAAAAAAAYaNBrL5AAAA//uQZAAAA1QwSgU94AI1BXjQoQpgBAJHtbXEFNiDVTdjUgQAAN4c0dl5LYU/Vs/upP/Z/2n9sP+z//mv8v//7H9v/+n///+z/n//////y/+3/////////u3///5f////+///////9f/LQWDAYA4OEg4SEhoWAgIGAgIhAgAEJCABAAAgQIBAgAEhAgCABAgQICBAAgAgAF4QIAABAEAABwAPAPgf';
         
-        // Initialize audio on first user interaction (required for mobile)
-        function initAudio() {
-            if (audioContext) return;
-            
-            try {
-                // Create AudioContext (works better on mobile than HTMLAudioElement)
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                
-                // Fetch and decode audio file
-                fetch('https://www.soundjay.com/mechanical/sounds/camera-shutter-click-01.mp3')
-                    .then(response => response.arrayBuffer())
-                    .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer))
-                    .then(buffer => {
-                        audioBuffer = buffer;
-                        audioLoaded = true;
-                    })
-                    .catch(err => {
-                        console.log('Audio load failed, falling back to HTMLAudioElement');
-                        // Fallback to HTMLAudioElement if Web Audio API fails
-                        audioBuffer = null;
-                    });
-            } catch (e) {
-                console.log('Web Audio API not supported');
-            }
+        // Create audio pool for rapid clicks
+        const audioPool = [];
+        const poolSize = 8;
+        let currentAudioIndex = 0;
+        let audioReady = false;
+        
+        // Initialize audio pool with base64 data
+        for (let i = 0; i < poolSize; i++) {
+            const audio = new Audio(shutterSoundBase64);
+            audio.volume = 0.5;
+            audioPool.push(audio);
         }
         
-        // Fallback audio element (pre-loaded)
-        const shutterSoundFallback = new Audio();
-        shutterSoundFallback.src = 'https://www.soundjay.com/mechanical/sounds/camera-shutter-click-01.mp3';
-        shutterSoundFallback.volume = 0.5;
-        shutterSoundFallback.preload = 'auto';
-        shutterSoundFallback.load(); // Force preload
+        // Also load the full quality sound
+        const fullQualityAudio = new Audio('https://www.soundjay.com/mechanical/sounds/camera-shutter-click-01.mp3');
+        fullQualityAudio.volume = 0.5;
+        fullQualityAudio.addEventListener('canplaythrough', () => {
+            audioReady = true;
+            // Replace pool with full quality
+            audioPool.forEach((_, i) => {
+                audioPool[i] = new Audio('https://www.soundjay.com/mechanical/sounds/camera-shutter-click-01.mp3');
+                audioPool[i].volume = 0.5;
+            });
+        });
         
-        // Play sound using Web Audio API (instant playback)
+        // Play sound - works on every click
         function playShutterSound() {
-            if (audioContext && audioBuffer && audioLoaded) {
-                // Resume context if suspended (mobile requirement)
-                if (audioContext.state === 'suspended') {
-                    audioContext.resume();
-                }
-                
-                // Create new source for each play (Web Audio best practice)
-                const source = audioContext.createBufferSource();
-                source.buffer = audioBuffer;
-                
-                // Create gain node for volume control
-                const gainNode = audioContext.createGain();
-                gainNode.gain.value = 0.5;
-                
-                source.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-                source.start(0);
-            } else {
-                // Fallback to HTMLAudioElement
-                shutterSoundFallback.currentTime = 0;
-                shutterSoundFallback.play().catch(() => {});
+            try {
+                // Clone and play for guaranteed playback
+                const audio = audioPool[currentAudioIndex].cloneNode();
+                audio.volume = 0.5;
+                audio.play().catch(() => {});
+                currentAudioIndex = (currentAudioIndex + 1) % poolSize;
+            } catch (e) {
+                // Silent fail
             }
         }
         
-        // Initialize audio on first touch/click (mobile requirement)
-        function handleFirstInteraction() {
-            if (!userInteracted) {
-                userInteracted = true;
-                initAudio();
-                
-                // Prime the fallback audio for mobile
-                shutterSoundFallback.play().then(() => {
-                    shutterSoundFallback.pause();
-                    shutterSoundFallback.currentTime = 0;
-                }).catch(() => {});
-            }
-        }
-        
-        // Listen for first interaction on both touch and mouse
-        document.addEventListener('touchstart', handleFirstInteraction, { once: true, passive: true });
-        document.addEventListener('mousedown', handleFirstInteraction, { once: true });
-        
-        // Main click handler with optimized sound
+        // Fast click handler
         function handleClick(e) {
-            // For touch events, use the first touch
-            const isTouchEvent = e.type === 'touchstart';
-            const isLeftClick = !isTouchEvent && e.button === 0;
+            // Play sound instantly
+            playShutterSound();
             
-            if (isTouchEvent || isLeftClick) {
-                // Play shutter sound (now optimized for mobile)
-                playShutterSound();
-                
-                // Flash the camera
-                cameraFlash.classList.add('flash-on');
-                screenFlash.classList.add('active');
-                
-                // Remove flash after short delay
-                setTimeout(() => {
-                    cameraFlash.classList.remove('flash-on');
-                    screenFlash.classList.remove('active');
-                }, 150);
-            }
+            // Flash the camera
+            cameraFlash.classList.add('flash-on');
+            screenFlash.classList.add('active');
+            
+            // Remove flash quickly
+            setTimeout(() => {
+                cameraFlash.classList.remove('flash-on');
+                screenFlash.classList.remove('active');
+            }, 100);
         }
         
         // Handle both mouse and touch events

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursor Alignment Test (ZOOMED)</title>
+    <style>
+        body {
+            background-color: #111;
+            color: white;
+            font-family: monospace;
+            cursor: none;
+            overflow: hidden;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* REPRODUCING THE ISSUE: Adding zoom */
+            zoom: 0.8; 
+        }
+
+        /* --- COPIED CURSOR CSS FROM index.html --- */
+        .cursor-spotlight {
+            position: fixed;
+            width: 60px;
+            height: 45px;
+            pointer-events: none;
+            z-index: 9999;
+            transition: opacity 0.3s ease;
+        }
+        .cursor-spotlight::before {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 40px;
+            background: rgba(255,255,255,0.15);
+            border: 2px solid rgba(255,0,0,0.8); /* Red border for visibility */
+            border-radius: 8px;
+            top: 5px;
+            left: 0;
+        }
+        .cursor-spotlight::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 30%, transparent 32%, transparent 50%, rgba(255,255,255,0.2) 52%, transparent 54%);
+            border: 2px solid blue; /* Blue border for visibility */
+            border-radius: 50%;
+            top: 13px;
+            left: 18px;
+        }
+
+        /* --- TEST TARGETS AND GRID --- */
+        .grid-line {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.1);
+            pointer-events: none;
+        }
+        .grid-line.h { width: 100%; height: 1px; }
+        .grid-line.v { height: 100%; width: 1px; }
+
+        .target {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 1px solid red;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: auto;
+        }
+        .target::before, .target::after {
+            content: '';
+            position: absolute;
+            background: red;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .target::before { width: 100%; height: 1px; }
+        .target::after { width: 1px; height: 100%; }
+
+        /* --- DEBUG INFO --- */
+        #debugInfo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border: 1px solid #333;
+            pointer-events: none;
+            font-size: 14px;
+            line-height: 1.5;
+            z-index: 10000;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="debugInfo">
+        <strong>Cursor Logic Debug (ZOOM: 0.8)</strong><br>
+        Mouse X: <span id="mouseX">0</span><br>
+        Mouse Y: <span id="mouseY">0</span><br>
+        Cursor CSS Left: <span id="cssLeft">0</span><br>
+        Cursor CSS Top: <span id="cssTop">0</span><br>
+        Zoom Corrected Left: <span id="zcLeft">0</span><br>
+        Zoom Corrected Top: <span id="zcTop">0</span><br>
+    </div>
+
+    <!-- Grid Lines -->
+    <div class="grid-line h" style="top: 50%;"></div>
+    <div class="grid-line v" style="left: 50%;"></div>
+
+    <!-- Center Target -->
+    <div class="target" style="top: 50%; left: 50%;"></div>
+
+    <!-- The actual cursor element -->
+    <div class="cursor-spotlight" id="cursorSpotlight"></div>
+
+    <script>
+        const spotlight = document.getElementById('cursorSpotlight');
+        const debug = {
+            mX: document.getElementById('mouseX'),
+            mY: document.getElementById('mouseY'),
+            cL: document.getElementById('cssLeft'),
+            cT: document.getElementById('cssTop'),
+            zL: document.getElementById('zcLeft'),
+            zT: document.getElementById('zcTop'),
+        };
+
+        const ZOOM = 0.8;
+
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+
+            // --- FIXED LOGIC ---
+            // Visual Position = CSS Value * ZOOM
+            // We want Visual Position = Client Position - (Visual Offset)
+            // Visual Offset = CSS Offset * ZOOM
+            // CSS Value * ZOOM = Client Position - (CSS Offset * ZOOM)
+            // CSS Value = (Client Position / ZOOM) - CSS Offset
+            
+            const fixedLeft = (x / ZOOM) - 30;
+            const fixedTop = (y / ZOOM) - 25;
+
+            spotlight.style.left = fixedLeft + 'px';
+            spotlight.style.top = fixedTop + 'px';
+
+            debug.mX.textContent = x;
+            debug.mY.textContent = y;
+            debug.cL.textContent = fixedLeft.toFixed(1);
+            debug.cT.textContent = fixedTop.toFixed(1);
+            
+            // Expected Visual Position
+            debug.zL.textContent = (fixedLeft * ZOOM).toFixed(1);
+            debug.zT.textContent = (fixedTop * ZOOM).toFixed(1);
+        });
+    </script>
+</body>
+</html>
